@@ -1,29 +1,15 @@
 import { Fragment } from "react";
-import SEO from "../../components/seo";
 import LayoutOne from "../../layouts/LayoutOne";
-import FeatureIcon from "../../wrappers/feature-icon/FeatureIcon";
-import TabProduct from "../../wrappers/product/TabProduct";
-import BlogFeatured from "../../wrappers/blog-featured/BlogFeatured";
+import CategoriesSection from "../../wrappers/category/CategoriesSection";
 
 const HomeFashion = () => {
   return (
     <Fragment>
-      <SEO
-        titleTemplate="Fashion Home"
-        description="Fashion home of flone react minimalist eCommerce template."
-      />
       <LayoutOne
         headerContainerClass="container-fluid"
         headerPaddingClass="header-padding-1"
       >
-        {/* featured icon */}
-        <FeatureIcon spaceTopClass="pt-100" spaceBottomClass="pb-60" />
-
-        {/* tab product */}
-        <TabProduct spaceBottomClass="pb-60" category="fashion" />
-
-        {/* blog featured */}
-        <BlogFeatured spaceBottomClass="pb-55" />
+        <CategoriesSection spaceBottomClass="pb-60" />
       </LayoutOne>
     </Fragment>
   );

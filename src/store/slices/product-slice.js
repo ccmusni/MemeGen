@@ -7,7 +7,7 @@ const productSlice = createSlice({
     status: "idle" | "pending" | "error",
     successMessage: null,
     errorMessage: null,
-    products: [],
+    products: null,
   },
   reducers: {
     setProducts(state, action) {

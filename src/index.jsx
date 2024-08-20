@@ -10,6 +10,8 @@ import "yet-another-react-lightbox/styles.css";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
 import "./assets/scss/style.scss";
 import "./i18n";
+import { setProducts } from "./store/slices/product-slice";
+import products from "./data/products.json";
 
 const container = document.getElementById("root");
 const root = createRoot(container);

@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import FooterCopyright from "../../components/footer/FooterCopyright";
 import FooterNewsletter from "../../components/footer/FooterNewsletter";
 
-
 const FooterOne = ({
   backgroundColorClass,
   spaceTopClass,
@@ -13,10 +12,20 @@ const FooterOne = ({
   spaceRightClass,
   containerClass,
   extraFooterClass,
-  sideMenu
+  sideMenu,
 }) => {
   return (
-    <footer className={clsx("footer-area", backgroundColorClass, spaceTopClass, spaceBottomClass, extraFooterClass, spaceLeftClass, spaceRightClass )}>
+    <footer
+      className={clsx(
+        "footer-area",
+        backgroundColorClass,
+        spaceTopClass,
+        spaceBottomClass,
+        extraFooterClass,
+        spaceLeftClass,
+        spaceRightClass
+      )}
+    >
       <div className={`${containerClass ? containerClass : "container"}`}>
         <div className="row">
           <div
@@ -25,12 +34,9 @@ const FooterOne = ({
             }`}
           >
             {/* footer copyright */}
-            <FooterCopyright
-              footerLogo="/assets/img/logo/logo.png"
-              spaceBottomClass="mb-30"
-            />
+            <FooterCopyright spaceBottomClass="mb-30" text="MemeGen" />
           </div>
-          <div
+          {/* <div
             className={`${
               sideMenu ? "col-xl-2 col-sm-4" : "col-lg-2 col-sm-4"
             }`}
@@ -160,13 +166,12 @@ const FooterOne = ({
               sideMenu ? "col-xl-3 col-sm-8" : "col-lg-4 col-sm-6"
             }`}
           >
-            {/* footer newsletter */}
             <FooterNewsletter
               spaceBottomClass="mb-30"
               spaceLeftClass="ml-70"
               sideMenu={sideMenu}
             />
-          </div>
+          </div> */}
         </div>
       </div>
     </footer>
@@ -181,7 +186,7 @@ FooterOne.propTypes = {
   spaceBottomClass: PropTypes.string,
   spaceTopClass: PropTypes.string,
   spaceLeftClass: PropTypes.string,
-  spaceRightClass: PropTypes.string
+  spaceRightClass: PropTypes.string,
 };
 
 export default FooterOne;

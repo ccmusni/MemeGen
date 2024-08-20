@@ -10,8 +10,9 @@ import ShopProducts from "../../wrappers/product/ShopProducts";
 import { fetchProducts } from "../../store/actions/product-actions";
 import SubCategories from "../../components/category/SubCategories";
 
-const ShopGridNoSidebar = () => {
+const ProductsByCategory = () => {
   const dispatch = useDispatch();
+  let { id } = useParams();
   const [layout, setLayout] = useState("grid three-column");
   const sortType = "";
   const sortValue = "";
@@ -28,8 +29,10 @@ const ShopGridNoSidebar = () => {
   let { pathname } = useLocation();
 
   useEffect(() => {
-    dispatch(fetchProducts({}));
-  }, [dispatch]);
+    // if (!products) {
+    dispatch(fetchProducts({ category_id: id }));
+    // }
+  }, [dispatch, id]);
 
   useEffect(() => {
     if (!!products?.length) {
@@ -65,6 +68,7 @@ const ShopGridNoSidebar = () => {
           <div className="container">
             <div className="row">
               <div className="col-lg-12">
+                <SubCategories layout={layout} categories={categories} />
                 <ShopProducts
                   layout={layout}
                   products={currentData}
@@ -79,4 +83,4 @@ const ShopGridNoSidebar = () => {
   );
 };
 
-export default ShopGridNoSidebar;
+export default ProductsByCategory;

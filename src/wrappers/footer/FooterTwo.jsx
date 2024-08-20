@@ -11,21 +11,32 @@ const FooterTwo = ({
   footerTopSpaceTopClass,
   footerTopSpaceBottomClass,
   footerLogo,
-  backgroundImage
+  backgroundImage,
 }) => {
   return (
     <footer
-      className={clsx("footer-area", backgroundColorClass, spaceLeftClass, spaceRightClass, backgroundImage && "bg-img")}
+      className={clsx(
+        "footer-area",
+        backgroundColorClass,
+        spaceLeftClass,
+        spaceRightClass,
+        backgroundImage && "bg-img"
+      )}
       style={{
         backgroundImage: ` ${
           backgroundImage
             ? `url(${process.env.PUBLIC_URL + backgroundImage})`
             : `url()`
-        }`
+        }`,
       }}
     >
       <div
-        className={clsx("footer-top text-center", footerTopBackgroundColorClass, footerTopSpaceTopClass, footerTopSpaceBottomClass)}
+        className={clsx(
+          "footer-top text-center",
+          footerTopBackgroundColorClass,
+          footerTopSpaceTopClass,
+          footerTopSpaceBottomClass
+        )}
       >
         <div className="container">
           <div className="footer-logo">
@@ -85,7 +96,7 @@ const FooterTwo = ({
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                Flone
+                MemeGen
               </a>
               . All Rights Reserved.
             </p>
@@ -105,7 +116,7 @@ FooterTwo.propTypes = {
   footerTopSpaceBottomClass: PropTypes.string,
   footerTopSpaceTopClass: PropTypes.string,
   spaceLeftClass: PropTypes.string,
-  spaceRightClass: PropTypes.string
+  spaceRightClass: PropTypes.string,
 };
 
 export default FooterTwo;

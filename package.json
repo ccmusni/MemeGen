@@ -1,7 +1,8 @@
 {
   "name": "flone-react",
   "version": "2.0.0",
-  "private": true,
+  "private": false,
+  "proxy": "http://localhost:3000/",
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.6",
     "animate.css": "^4.1.1",

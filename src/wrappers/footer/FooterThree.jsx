@@ -7,19 +7,23 @@ import FooterNewsletter from "../../components/footer/FooterNewsletter";
 const FooterThree = ({
   backgroundColorClass,
   spaceTopClass,
-  spaceBottomClass
+  spaceBottomClass,
 }) => {
   return (
-    <footer className={clsx("footer-area", backgroundColorClass, spaceTopClass, spaceBottomClass)}>
+    <footer
+      className={clsx(
+        "footer-area",
+        backgroundColorClass,
+        spaceTopClass,
+        spaceBottomClass
+      )}
+    >
       <div className="container">
         <div className="footer-border pt-100">
           <div className="row">
             <div className="col-lg-2 col-sm-4">
               {/* footer copyright */}
-              <FooterCopyright
-                footerLogo="/assets/img/logo/logo.png"
-                spaceBottomClass="mb-30"
-              />
+              <FooterCopyright spaceBottomClass="mb-30" />
             </div>
             <div className="col-lg-2 col-md-4 col-sm-4">
               <div className="footer-widget mb-30 ml-30">
@@ -141,7 +145,7 @@ const FooterThree = ({
 FooterThree.propTypes = {
   backgroundColorClass: PropTypes.string,
   spaceBottomClass: PropTypes.string,
-  spaceTopClass: PropTypes.string
+  spaceTopClass: PropTypes.string,
 };
 
 export default FooterThree;
