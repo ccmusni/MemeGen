@@ -9,6 +9,7 @@ import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
 import ShopProducts from "../../wrappers/product/ShopProducts";
 import { fetchProducts } from "../../store/actions/product-actions";
 import SubCategories from "../../components/category/SubCategories";
+import DesignMakerComponent from "../../components/printful-design-marker/DesignMakerComponent";
 
 const ProductsByCategory = () => {
   const dispatch = useDispatch();

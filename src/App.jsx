@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomeFashion from "./pages/home/HomeFashion";
 import ShopGridNoSidebar from "./pages/shop/ShopGridNoSidebar";
 import ProductsByCategory from "./pages/shop/ProductsByCategory";
+import DesignMakerComponent from "./components/printful-design-marker/DesignMakerComponent";
 
 const App = () => {
   return (
@@ -40,6 +41,11 @@ const App = () => {
             <Route
               path={process.env.PUBLIC_URL + "/category/:id/products"}
               element={<ProductsByCategory />}
+            />
+
+            <Route
+              path={process.env.PUBLIC_URL + "/product/:id"}
+              element={<DesignMakerComponent />}
             />
 
             {/* Shop product pages */}
