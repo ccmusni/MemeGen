@@ -4,12 +4,10 @@ import { useParams, useLocation } from "react-router-dom";
 import SEO from "../../components/seo";
 import LayoutOne from "../../layouts/LayoutOne";
 import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
-import RelatedProductSlider from "../../wrappers/product/RelatedProductSlider";
-import ProductDescriptionTab from "../../wrappers/product/ProductDescriptionTab";
-import ProductImageDescription from "../../wrappers/product/ProductImageDescription";
 import { fetchProducts } from "../../store/actions/product-actions";
+import DesignMakerComponent from "../../components/printful-design-marker/DesignMakerComponent";
 
-const Product = () => {
+const ProductDesignMaker = () => {
   const dispatch = useDispatch();
   let { pathname } = useLocation();
   let { id } = useParams();
@@ -35,26 +33,23 @@ const Product = () => {
             { label: "Shop Product", path: process.env.PUBLIC_URL + pathname },
           ]}
         />
-        {product && (
-          <ProductImageDescription
-            spaceTopClass="pt-100"
-            spaceBottomClass="pb-100"
-            product={product}
-          />
-        )}
-        {/* product description tab */}
-        {/* <ProductDescriptionTab
-          spaceBottomClass="pb-90"
-          productFullDesc={product.fullDescription}
-        /> */}
-        {/* related product slider */}
-        {/* <RelatedProductSlider
-          spaceBottomClass="pb-95"
-          category={product.category[0]}
-        /> */}
+
+        <div className="product-designer-area pt-25 pb-100">
+          <div className="container">
+            <div className="row">
+              <div className="col-lg-12">
+                {product && (
+                  <div style={{ textAlign: "right" }}>
+                    <DesignMakerComponent productId={id} />
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
       </LayoutOne>
     </Fragment>
   );
 };
 
-export default Product;
+export default ProductDesignMaker;

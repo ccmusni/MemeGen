@@ -1,10 +1,13 @@
-import React, { useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import "./styles.css";
+import React, { useEffect, useState } from "react";
+import cogoToast from "cogo-toast";
 
-const DesignMakerComponent = () => {
-  const location = useLocation();
-  const productId = +(location.pathname.split("/")[2] ?? 438);
+import "./styles.css";
+import Spinner from "../spinner/Spinner";
+import { useNavigate } from "react-router-dom";
+
+const DesignMakerComponent = ({ productId = 438 }) => {
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
 
   // Function to initialize PFDesignMaker
   const initializeDesignMaker = (nonce) => {
@@ -18,7 +21,16 @@ const DesignMakerComponent = () => {
           productId,
         },
         applyImageFromUrl: process.env.REACT_APP_PRINTFUL_EXTERNAL_IMAGE_URL,
+        onIframeLoaded: () => setIsLoading(false),
+        onTemplateSaved: () => {
+          cogoToast.success("Template saved!");
+          navigate(`/product/${productId}`);
+        },
       });
+
+      window.designMaker = designMaker;
+
+      // setDesignMaker(newDesignMaker);
 
       // You can call any design maker methods here, if needed
       console.log("Design Maker initialized", designMaker);
@@ -55,7 +67,28 @@ const DesignMakerComponent = () => {
 
   return (
     <div>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        {isLoading && <Spinner />}
+      </div>
+
+      {/* Design Maker Container */}
       <div id="edm"></div>
+
+      {!isLoading && (
+        <div className="product-designer-btn-container btn-hover">
+          <button
+            onClick={() => {
+              if (window.designMaker) {
+                window.designMaker.sendMessage({
+                  event: "saveDesign",
+                });
+              }
+            }}
+          >
+            Save
+          </button>
+        </div>
+      )}
     </div>
   );
 };
