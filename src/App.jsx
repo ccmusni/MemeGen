@@ -6,6 +6,7 @@ import ShopGridNoSidebar from "./pages/shop/ShopGridNoSidebar";
 import ProductsByCategory from "./pages/shop/ProductsByCategory";
 import Product from "./pages/shop-product/Product";
 import ProductDesignMaker from "./pages/shop-product/ProductDesignMaker";
+import Cart from "./pages/other/Cart";
 
 const App = () => {
   return (
@@ -53,6 +54,8 @@ const App = () => {
               path={process.env.PUBLIC_URL + "/product/:id/design-maker"}
               element={<ProductDesignMaker />}
             />
+
+            <Route path={process.env.PUBLIC_URL + "/cart"} element={<Cart />} />
 
             {/* Shop product pages */}
             {/* <Route

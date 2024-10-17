@@ -17,8 +17,10 @@ const Product = () => {
   const product = products?.find((product) => product.id === +id);
 
   useEffect(() => {
-    dispatch(fetchProducts({}));
-  }, [dispatch]);
+    if (!products) {
+      dispatch(fetchProducts({}));
+    }
+  }, [dispatch, products]);
 
   return (
     <Fragment>

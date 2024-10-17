@@ -4,9 +4,17 @@ import cogoToast from "cogo-toast";
 import "./styles.css";
 import Spinner from "../spinner/Spinner";
 import { useNavigate } from "react-router-dom";
+import { fetchProductTemplate } from "../../store/actions/product-actions";
+import { useDispatch, useSelector } from "react-redux";
+import { setProductTemplate } from "../../store/slices/product-slice";
+import axios from "axios";
+import { addToCart } from "../../store/slices/cart-slice";
 
 const DesignMakerComponent = ({ productId = 438 }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { productTemplate } = useSelector((state) => state.product);
+  const [productTemplateId, setProductTemplateId] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
   // Function to initialize PFDesignMaker
@@ -22,18 +30,12 @@ const DesignMakerComponent = ({ productId = 438 }) => {
         },
         applyImageFromUrl: process.env.REACT_APP_PRINTFUL_EXTERNAL_IMAGE_URL,
         onIframeLoaded: () => setIsLoading(false),
-        onTemplateSaved: () => {
-          cogoToast.success("Template saved!");
-          navigate(`/product/${productId}`);
+        onTemplateSaved: (templateId) => {
+          setProductTemplateId(templateId);
         },
       });
 
       window.designMaker = designMaker;
-
-      // setDesignMaker(newDesignMaker);
-
-      // You can call any design maker methods here, if needed
-      console.log("Design Maker initialized", designMaker);
     }
   };
 
@@ -61,9 +63,53 @@ const DesignMakerComponent = ({ productId = 438 }) => {
     initializeDesignMaker(newNonce);
   };
 
+  const getProductTemplate = async () => {
+    const response = await fetch(
+      `${process.env.REACT_APP_PRINTFUL_BASE_URL}/product-templates/${productTemplateId}`
+    );
+
+    if (!response.ok) {
+      console.error(await response.text());
+      return;
+    }
+
+    const template = (await response.json())?.result;
+    dispatch(setProductTemplate(template));
+  };
+
   useEffect(() => {
     getNonce();
   }, []);
+
+  useEffect(() => {
+    if (productTemplateId) {
+      setIsLoading(true);
+      setTimeout(() => {
+        getProductTemplate();
+      }, 3500);
+    }
+  }, [productTemplateId]);
+
+  useEffect(() => {
+    if (productTemplate) {
+      setIsLoading(false);
+
+      dispatch(
+        addToCart({
+          ...productTemplate,
+          id: productTemplate.product_id,
+          image: [productTemplate.mockup_file_url],
+          quantity: 1,
+          price: 100,
+          discount: 0,
+        })
+      );
+
+      cogoToast.success("Design saved and added to cart.");
+      navigate(`/cart`);
+      dispatch(setProductTemplate(null));
+    }
+  }, [productTemplate]);
 
   return (
     <div>
@@ -72,7 +118,7 @@ const DesignMakerComponent = ({ productId = 438 }) => {
       </div>
 
       {/* Design Maker Container */}
-      <div id="edm"></div>
+      <div id="edm" style={{ display: isLoading ? "none" : "inherit" }}></div>
 
       {!isLoading && (
         <div className="product-designer-btn-container btn-hover">

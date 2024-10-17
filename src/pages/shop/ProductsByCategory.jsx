@@ -30,9 +30,7 @@ const ProductsByCategory = () => {
   let { pathname } = useLocation();
 
   useEffect(() => {
-    // if (!products) {
     dispatch(fetchProducts({ category_id: id }));
-    // }
   }, [dispatch, id]);
 
   useEffect(() => {

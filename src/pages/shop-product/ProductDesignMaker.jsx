@@ -15,8 +15,10 @@ const ProductDesignMaker = () => {
   const product = products?.find((product) => product.id === +id);
 
   useEffect(() => {
-    dispatch(fetchProducts({}));
-  }, [dispatch]);
+    if (!products?.length) {
+      dispatch(fetchProducts({}));
+    }
+  }, []);
 
   return (
     <Fragment>

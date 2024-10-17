@@ -12,3 +12,14 @@ export const fetchProducts = createAsyncThunk(
     return response.data?.result;
   }
 );
+
+export const fetchProductTemplate = createAsyncThunk(
+  "products/fetchProductTemplate",
+  async ({ productTemplateId }, { rejectWithValue }) => {
+    const response = await axios.get(
+      `${process.env.REACT_APP_PRINTFUL_BASE_URL}/product-templates/${productTemplateId}`
+    );
+
+    return response.data?.result;
+  }
+);
