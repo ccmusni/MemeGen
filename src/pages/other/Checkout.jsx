@@ -5,6 +5,7 @@ import { getDiscountPrice } from "../../helpers/product";
 import SEO from "../../components/seo";
 import LayoutOne from "../../layouts/LayoutOne";
 import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
+import { countries } from "../../data/countries";
 
 const Checkout = () => {
   let cartTotalPrice = 0;
@@ -21,11 +22,11 @@ const Checkout = () => {
       />
       <LayoutOne headerTop="visible">
         {/* breadcrumb */}
-        <Breadcrumb 
+        <Breadcrumb
           pages={[
-            {label: "Home", path: process.env.PUBLIC_URL + "/" },
-            {label: "Checkout", path: process.env.PUBLIC_URL + pathname }
-          ]} 
+            { label: "Home", path: process.env.PUBLIC_URL + "/" },
+            { label: "Checkout", path: process.env.PUBLIC_URL + pathname },
+          ]}
         />
         <div className="checkout-area pt-95 pb-100">
           <div className="container">
@@ -58,11 +59,9 @@ const Checkout = () => {
                           <label>Country</label>
                           <select>
                             <option>Select a country</option>
-                            <option>Azerbaijan</option>
-                            <option>Bahamas</option>
-                            <option>Bahrain</option>
-                            <option>Bangladesh</option>
-                            <option>Barbados</option>
+                            {countries.map((c) => (
+                              <option>{c.name}</option>
+                            ))}
                           </select>
                         </div>
                       </div>

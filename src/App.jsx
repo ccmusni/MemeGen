@@ -7,6 +7,7 @@ import ProductsByCategory from "./pages/shop/ProductsByCategory";
 import Product from "./pages/shop-product/Product";
 import ProductDesignMaker from "./pages/shop-product/ProductDesignMaker";
 import Cart from "./pages/other/Cart";
+import Checkout from "./pages/other/Checkout";
 
 const App = () => {
   return (
@@ -56,6 +57,11 @@ const App = () => {
             />
 
             <Route path={process.env.PUBLIC_URL + "/cart"} element={<Cart />} />
+
+            <Route
+              path={process.env.PUBLIC_URL + "/checkout"}
+              element={<Checkout />}
+            />
 
             {/* Shop product pages */}
             {/* <Route
