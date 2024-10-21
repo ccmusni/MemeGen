@@ -21,10 +21,12 @@ const ProductImageDescription = ({
   const compareItem = compareItems.find((item) => item.id === product.id);
 
   const discountedPrice = getDiscountPrice(
-    product.price ?? 0,
-    product.discount ?? 0
+    product.price ?? 100,
+    product.discount ?? 50
   );
-  const finalProductPrice = +(product.price * currency.currencyRate).toFixed(2);
+  const finalProductPrice = +(
+    product.price ?? 100 * currency.currencyRate
+  ).toFixed(2);
   const finalDiscountedPrice = +(
     discountedPrice * currency.currencyRate
   ).toFixed(2);
@@ -43,8 +45,8 @@ const ProductImageDescription = ({
               product={product}
               discountedPrice={discountedPrice}
               currency={currency}
-              finalDiscountedPrice={0.0}
-              finalProductPrice={0.0}
+              finalDiscountedPrice={finalDiscountedPrice}
+              finalProductPrice={finalProductPrice}
               cartItems={cartItems}
               wishlistItem={wishlistItem}
               compareItem={compareItem}

@@ -1,12 +1,14 @@
-import PropTypes from "prop-types";
 import React, { Fragment, useState } from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
+
 import { getProductCartQuantity } from "../../helpers/product";
-import Rating from "./sub-components/ProductRating";
 import { addToCart } from "../../store/slices/cart-slice";
 import { addToWishlist } from "../../store/slices/wishlist-slice";
 import { addToCompare } from "../../store/slices/compare-slice";
+
+import Rating from "./sub-components/ProductRating";
 
 const ProductDescriptionInfo = ({
   product,

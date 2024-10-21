@@ -16,6 +16,8 @@ import currencyReducer from "./slices/currency-slice";
 import cartReducer from "./slices/cart-slice";
 import compareReducer from "./slices/compare-slice";
 import wishlistReducer from "./slices/wishlist-slice";
+import memeReducer from "./slices/meme-slice";
+import editorReducer from "./slices/editor-slice";
 
 const persistConfig = {
   key: "flone",
@@ -31,6 +33,8 @@ export const rootReducer = combineReducers({
   cart: cartReducer,
   compare: compareReducer,
   wishlist: wishlistReducer,
+  meme: memeReducer,
+  editor: editorReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

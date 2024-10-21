@@ -4,13 +4,11 @@ import cogoToast from "cogo-toast";
 import "./styles.css";
 import Spinner from "../spinner/Spinner";
 import { useNavigate } from "react-router-dom";
-import { fetchProductTemplate } from "../../store/actions/product-actions";
 import { useDispatch, useSelector } from "react-redux";
 import { setProductTemplate } from "../../store/slices/product-slice";
-import axios from "axios";
 import { addToCart } from "../../store/slices/cart-slice";
 
-const DesignMakerComponent = ({ productId = 438 }) => {
+const DesignMakerComponent = ({ productId, meme }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { productTemplate } = useSelector((state) => state.product);
@@ -28,7 +26,8 @@ const DesignMakerComponent = ({ productId = 438 }) => {
         initProduct: {
           productId,
         },
-        applyImageFromUrl: process.env.REACT_APP_PRINTFUL_EXTERNAL_IMAGE_URL,
+        applyImageFromUrl:
+          meme ?? process.env.REACT_APP_PRINTFUL_EXTERNAL_IMAGE_URL,
         onIframeLoaded: () => setIsLoading(false),
         onTemplateSaved: (templateId) => {
           setProductTemplateId(templateId);

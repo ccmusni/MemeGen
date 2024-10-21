@@ -1,11 +1,9 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useLocation } from "react-router-dom";
 import SEO from "../../components/seo";
 import LayoutOne from "../../layouts/LayoutOne";
 import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
-import RelatedProductSlider from "../../wrappers/product/RelatedProductSlider";
-import ProductDescriptionTab from "../../wrappers/product/ProductDescriptionTab";
 import ProductImageDescription from "../../wrappers/product/ProductImageDescription";
 import { fetchProducts } from "../../store/actions/product-actions";
 
@@ -44,16 +42,6 @@ const Product = () => {
             product={product}
           />
         )}
-        {/* product description tab */}
-        {/* <ProductDescriptionTab
-          spaceBottomClass="pb-90"
-          productFullDesc={product.fullDescription}
-        /> */}
-        {/* related product slider */}
-        {/* <RelatedProductSlider
-          spaceBottomClass="pb-95"
-          category={product.category[0]}
-        /> */}
       </LayoutOne>
     </Fragment>
   );

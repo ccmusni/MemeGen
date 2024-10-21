@@ -1,11 +1,17 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useLocation } from "react-router-dom";
+
 import SEO from "../../components/seo";
 import LayoutOne from "../../layouts/LayoutOne";
 import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
-import { fetchProducts } from "../../store/actions/product-actions";
+import MemeList from "../../components/memes/MemeList";
+import MemeEditor from "../../components/memes/MemeEditor";
 import DesignMakerComponent from "../../components/printful-design-marker/DesignMakerComponent";
+
+import { fetchProducts } from "../../store/actions/product-actions";
+import { setSelectedMeme } from "../../store/slices/meme-slice";
+import { resetTextNode } from "../../store/slices/editor-slice";
 
 const ProductDesignMaker = () => {
   const dispatch = useDispatch();
@@ -13,8 +19,14 @@ const ProductDesignMaker = () => {
   let { id } = useParams();
   const { products } = useSelector((state) => state.product);
   const product = products?.find((product) => product.id === +id);
+  const { selectedMeme } = useSelector((state) => state.meme);
+  const [isEditingMeme, setIsEditingMeme] = useState(false);
 
   useEffect(() => {
+    dispatch(setSelectedMeme(null));
+    dispatch(resetTextNode());
+    setIsEditingMeme(false);
+
     if (!products?.length) {
       dispatch(fetchProducts({}));
     }
@@ -41,9 +53,29 @@ const ProductDesignMaker = () => {
             <div className="row">
               <div className="col-lg-12">
                 {product && (
-                  <div style={{ textAlign: "right" }}>
-                    <DesignMakerComponent productId={id} />
-                  </div>
+                  <>
+                    {selectedMeme ? (
+                      isEditingMeme ? (
+                        <MemeEditor
+                          onApplyMeme={() => setIsEditingMeme(false)}
+                        />
+                      ) : (
+                        <div style={{ textAlign: "right" }}>
+                          <DesignMakerComponent
+                            productId={id}
+                            meme={selectedMeme}
+                          />
+                        </div>
+                      )
+                    ) : (
+                      <MemeList
+                        onEditMeme={(item) => {
+                          dispatch(setSelectedMeme(item));
+                          setIsEditingMeme(true);
+                        }}
+                      />
+                    )}
+                  </>
                 )}
               </div>
             </div>
